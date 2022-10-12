@@ -50,13 +50,5 @@ class BigDecimalInt {
 };
 
 int main(){
-//BigDecimalInt a("3246546") , b("-546878464");
-    // cout<< a.sign() << " " ;
-    // cout<< a.size() << " " ;
-    // a = b ;
-    // cout<< a ;
-    // if( a == b )
-    //     cout<< 1 ;
-    // else
-    //     cout<< 0 ;    
+   
 }
