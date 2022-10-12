@@ -5,7 +5,6 @@ using namespace std;
 class BigDecimalInt {
     private:
         string digits;
-        char sign ;
     public:
         BigDecimalInt(string some_thing){
             digits = some_thing ;
@@ -36,10 +35,10 @@ class BigDecimalInt {
         }
 
         int sign(){
-            if( sign == '-'){
+            if( digits[0] == '-'){
                 return -1 ;
             }
-            else if(sign == '+'){
+            else if(digits[0] == '+'){
                 return 1 ;
             }
         }
