@@ -36,14 +36,14 @@ class BigDecimalInt {
         }
 
         int sign(){
-            if( digits[0] == '-'){
+            if( sign == '-'){
                 return -1 ;
             }
-            else{
+            else if(sign == '+'){
                 return 1 ;
             }
         }
-
+    
         friend ostream& operator << (ostream& out, BigDecimalInt b){
             out << b.digits ;
             return out ;
