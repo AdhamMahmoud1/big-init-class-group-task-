@@ -5,6 +5,7 @@ using namespace std;
 class BigDecimalInt {
     private:
         string digits;
+        char sign ;
     public:
         BigDecimalInt(string some_thing){
             digits = some_thing ;
