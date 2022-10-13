@@ -7,9 +7,9 @@ class BigInt {
     private:
         string digits;
     public:
-        BigDecimalInt(string some_thing){
-            digits = some_thing ;
-        }
+        BigInt(string some_thing);
+        BigInt(long long );
+      
 
         bool operator> (BigInt anotherDec){
             for(int i = 0 ; i < anotherDec.digits.length() ; i++){
