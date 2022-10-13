@@ -2,7 +2,7 @@
 #include <string>
 using namespace std;
 
-class BigDecimalInt {
+class BigInt {
     private:
         string digits;
     public:
@@ -100,6 +100,49 @@ bool operator> (BigDecimalInt anotherDec){
         }  
 };
 
-int main(){
-   
+BigInt::BigInt(string decStr): digits(decStr){
+    digits = "";
+    if (decStr[0] == '-'){
+        digits.push_back(decStr[0]);
+        decStr.erase(decStr.begin());
+        for (int i = 0; i < decStr.size(); i ++){
+            if(!isdigit(decStr[i])){
+                throw("Error");
+            }
+            digits.push_back(decStr[i]);   
+        }
+    }
+    else if ( decStr[0] =='+'){
+        decStr.erase(decStr.begin());
+        for (int i = 0; i < decStr.size(); i ++){
+            if(!isdigit(decStr[i])){
+                throw("Error");
+            }
+            digits.push_back(decStr[i]);
+        }
+    }
+    else{
+        for (int i = 0; i < decStr.size(); i ++){
+            if(!isdigit(decStr[i])){
+                throw("Error");
+            }
+            digits.push_back(decStr[i]);
+        }
+    }
 }
+BigInt::BigInt(long long decInt){
+    digits = "";
+    int i = 0;
+    if (decInt < 0){
+        decInt *= -1;
+        digits.push_back('-');
+        i = 1;
+    }
+    do{
+        digits.push_back((decInt % 10) + '0');
+        decInt /= 10;
+    }
+    while(decInt != 0);
+    reverse(digits.begin() + i, digits.end());
+}
+
