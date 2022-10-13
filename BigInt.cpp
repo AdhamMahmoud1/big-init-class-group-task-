@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+
 using namespace std;
 
 class BigInt {
@@ -10,13 +11,13 @@ class BigInt {
             digits = some_thing ;
         }
 
-        bool operator> (BigDecimalInt anotherDec){
+        bool operator> (BigInt anotherDec){
             for(int i = 0 ; i < anotherDec.digits.length() ; i++){
                 
             }
         }
     
-bool operator> (BigDecimalInt anotherDec){
+bool operator> (BigInt anotherDec){
             if( digits[0] == '-' && anotherDec.digits[0] != '-'){
                 return 0 ;
             }
@@ -67,11 +68,11 @@ bool operator> (BigDecimalInt anotherDec){
             }        
         }
     
-        bool operator== (BigDecimalInt anotherDec){
+        bool operator== (BiglInt anotherDec){
             return digits == anotherDec.digits ;
         }
 
-        BigDecimalInt& operator= (BigDecimalInt anotherDec){
+        BigInt& operator= (BigInt anotherDec){
             digits = anotherDec.digits;
             return *this ;
         }
@@ -94,7 +95,7 @@ bool operator> (BigDecimalInt anotherDec){
             }
         }
     
-        friend ostream& operator << (ostream& out, BigDecimalInt b){
+        friend ostream& operator << (ostream& out, BigInt b){
             out << b.digits ;
             return out ;
         }  
