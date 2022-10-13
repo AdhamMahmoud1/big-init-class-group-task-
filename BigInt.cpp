@@ -146,3 +146,34 @@ BigInt::BigInt(long long decInt){
     reverse(digits.begin() + i, digits.end());
 }
 
+
+// I think it's not compeleted yet.
+BigInt& BigInt:: operator+ (BigInt num1){
+    string sum = ""; // Here I will put the sum of two big numbers
+    if (digits.size() > num1.digits.size()){
+        swap(digits, num1.digits);
+    }
+    reverse(num1.digits.begin(), num1.digits.end());
+    reverse(digits.begin(), digits.end());
+    int len1 = digits.size(), len2 = num1.digits.size();
+    int digitDiff = len2 - len1;
+    int carry = 0;
+    int intSum;
+    for (int i = len1 - 1; i <= 0; i--){
+        intSum = (digits[i] - '0') + ((num1.digits[i] - '0') + carry);
+        sum.push_back((intSum % 10) - '0');
+        carry = intSum / 10;
+    }
+    for (int i= len1; i< len2; i++)
+    {
+        int intSum = ((num1.digits[i]-'0')+carry);
+        sum.push_back(intSum%10 + '0');
+        carry = intSum/10;
+    }
+    if (carry){
+        sum.push_back(carry+'0');
+    }
+    reverse(sum.begin(), sum.end());
+    BigInt num2(sum);
+    return num2;
+}
