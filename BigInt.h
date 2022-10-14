@@ -3,19 +3,18 @@
 #include <iostream>
 using namespace std;
 
-class BigDecimalInt {
+class BigInt {
     private:
         string digits;
     public:
-        BigDecimalInt();
-        BigDecimalInt(string);
-        BigDecimalInt(long long);
-        BigDecimalInt& operator+ (BigDecimalInt num1);
-        bool operator> (BigDecimalInt anotherDec);
-        bool operator== (BigDecimalInt anotherDec);
-        BigDecimalInt& operator= (BigDecimalInt anotherDec);
+        BigInt(string);
+        BigInt(long long);
+        BigInt& operator+ (BigInt num1);
+        bool operator> (BigInt anotherDec);
+        bool operator== (BigInt anotherDec);
+        BigInt& operator= (BigInt anotherDec);
         int size();
         int sign();
-        friend ostream& operator << (ostream& out, BigDecimalInt b);
+        friend ostream& operator << (ostream& out, BigInt b);
 };
 #endif
