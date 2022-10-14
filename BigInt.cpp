@@ -78,8 +78,8 @@ BigInt& BigInt:: operator+ (BigInt num1){
         sum.push_back(carry+'0');
     }
     reverse(sum.begin(), sum.end());
-    BigInt num2(sum);
-    return num2;
+    digits = sum;
+    return *this;
 }
 
 
