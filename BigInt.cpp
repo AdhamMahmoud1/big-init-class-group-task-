@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include "BigDecInt.h"
 
 using namespace std;
 
