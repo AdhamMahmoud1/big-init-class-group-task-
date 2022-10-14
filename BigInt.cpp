@@ -4,7 +4,7 @@
 
 using namespace std;
 
-BigInt::BigInt(string decStr): digits(decStr){
+BigDecimalInt::BigDecimalInt(string decStr): digits(decStr){
     digits = "";
     if (decStr[0] == '-'){
         digits.push_back(decStr[0]);
@@ -34,7 +34,7 @@ BigInt::BigInt(string decStr): digits(decStr){
         }
     }
 }
-BigInt::BigInt(long long decInt){
+BigDecimalInt::BigDecimalInt(long long decInt){
     digits = "";
     int i = 0;
     if (decInt < 0){
@@ -52,7 +52,7 @@ BigInt::BigInt(long long decInt){
 
 
 // I think it's not compeleted yet.
-BigInt& BigInt:: operator+ (BigInt num1){
+BigDecimalInt& BigDecimalInt:: operator+ (BigDecimalInt num1){
     string sum = ""; // Here I will put the sum of two big numbers
     if (digits.size() > num1.digits.size()){
         swap(digits, num1.digits);
@@ -83,7 +83,7 @@ BigInt& BigInt:: operator+ (BigInt num1){
 }
 
 
-bool BigInt:: operator> (BigInt anotherDec){
+bool BigDecimalInt:: operator> (BigDecimalInt anotherDec){
             if( digits[0] == '-' && anotherDec.digits[0] != '-'){
                 return 0 ;
             }
@@ -134,14 +134,14 @@ bool BigInt:: operator> (BigInt anotherDec){
             }        
         }
     
-bool BigInt:: operator== (BiglInt anotherDec){
+bool BigDecimalInt:: operator== (BigDecimalInt anotherDec){
             return digits == anotherDec.digits ;
 }
-BigInt& BigInt ::operator= (BigInt anotherDec){
+BigDecimalInt& BigDecimalInt ::operator= (BigDecimalInt anotherDec){
             digits = anotherDec.digits;
             return *this ;
 }
-int BigInt:: size(){
+int BigDecimalInt:: size(){
             if(digits[0] == '-' || digits[0] == '+' ){
                 return digits.length() - 1 ;
             }
@@ -149,7 +149,7 @@ int BigInt:: size(){
                 return digits.length() ;    
             }
 }
-int BigInt:: sign(){
+int BigDecimalInt:: sign(){
             if( digits[0] == '-'){
                 return -1 ;
             }
@@ -158,7 +158,7 @@ int BigInt:: sign(){
             }
 }
     
-ostream& operator << (ostream& out, BigInt b){
+ostream& operator << (ostream& out, BigDecimalInt b){
             out << b.digits ;
             return out ;
 }  
