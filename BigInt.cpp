@@ -158,7 +158,7 @@ int BigInt:: sign(){
             }
 }
     
-friend ostream& BigInt ::operator << (ostream& out, BigInt b){
+ostream& operator << (ostream& out, BigInt b){
             out << b.digits ;
             return out ;
 }  
