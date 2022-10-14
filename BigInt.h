@@ -1,5 +1,5 @@
-#ifndef BIGDECINT_H_INCLUDE
-#define BIGDECINT_H_INCLUDE
+#ifndef BIGINT_H_INCLUDE
+#define BIGINT_H_INCLUDE
 #include <iostream>
 using namespace std;
 
