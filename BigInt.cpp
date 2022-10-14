@@ -1,106 +1,8 @@
 #include <iostream>
 #include <string>
-#include "BigDecInt.h"
+#include "BigInt.h"
 
 using namespace std;
-
-class BigInt {
-    private:
-        string digits;
-    public:
-        BigInt(string some_thing);
-        BigInt(long long );
-      
-
-        bool operator> (BigInt anotherDec){
-            for(int i = 0 ; i < anotherDec.digits.length() ; i++){
-                
-            }
-        }
-    
-bool operator> (BigInt anotherDec){
-            if( digits[0] == '-' && anotherDec.digits[0] != '-'){
-                return 0 ;
-            }
-            else if(digits[0] != '-' && anotherDec.digits[0] == '-'){
-                return 1 ;
-            }
-            else if(digits[0] == anotherDec.digits[0] && digits[0] == '-' && digits.length() != anotherDec.digits.length()){
-                if(digits.length() > anotherDec.digits.length()){
-                    return 0 ;
-                }
-                else if(digits.length() < anotherDec.digits.length()){
-                    return 1 ;
-                }
-            }
-            else if(digits[0] == anotherDec.digits[0] && digits[0] != '-' && digits.length() != anotherDec.digits.length()){
-                if(digits.length() > anotherDec.digits.length()){
-                    return 1 ;
-                }
-                else if(digits.length() < anotherDec.digits.length()){
-                    return 0 ;
-                }
-            }
-            else if(digits[0] == anotherDec.digits[0] && digits[0] == '-' && digits.length() == anotherDec.digits.length()){
-                for(int i = 0 ; i < digits.length() ; i++){
-                    if(digits[i] != anotherDec.digits[i]){
-                        int a = (digits[i] - '0') , b = (anotherDec.digits[i] - '0') ;
-                        if( a > b ){
-                            return 0 ;
-                        }
-                        else if( a < b ){
-                            return 1 ;
-                        }
-                    }
-                }
-            }
-            else if(digits[0] == anotherDec.digits[0] && digits[0] != '-' && digits.length() == anotherDec.digits.length()){
-                for(int i = 0 ; i < digits.length() ; i++){
-                    if(digits[i] != anotherDec.digits[i]){
-                        int a = (digits[i] - '0') , b = (anotherDec.digits[i] - '0') ;
-                        if( a > b ){
-                            return 1 ;
-                        }
-                        else if( a < b ){
-                            return 0 ;
-                        }
-                    }
-                }
-            }        
-        }
-    
-        bool operator== (BiglInt anotherDec){
-            return digits == anotherDec.digits ;
-        }
-
-        BigInt& operator= (BigInt anotherDec){
-            digits = anotherDec.digits;
-            return *this ;
-        }
-
-        int size(){
-            if(digits[0] == '-' || digits[0] == '+' ){
-                return digits.length() - 1 ;
-            }
-            else{
-                return digits.length() ;    
-            }
-        }
-
-        int sign(){
-            if( digits[0] == '-'){
-                return -1 ;
-            }
-            else if(digits[0] == '+'){
-                return 1 ;
-            }
-        }
-    
-        friend ostream& operator << (ostream& out, BigInt b){
-            out << b.digits ;
-            return out ;
-        }  
-};
 
 BigInt::BigInt(string decStr): digits(decStr){
     digits = "";
@@ -179,3 +81,84 @@ BigInt& BigInt:: operator+ (BigInt num1){
     BigInt num2(sum);
     return num2;
 }
+
+
+bool BigInt:: operator> (BigInt anotherDec){
+            if( digits[0] == '-' && anotherDec.digits[0] != '-'){
+                return 0 ;
+            }
+            else if(digits[0] != '-' && anotherDec.digits[0] == '-'){
+                return 1 ;
+            }
+            else if(digits[0] == anotherDec.digits[0] && digits[0] == '-' && digits.length() != anotherDec.digits.length()){
+                if(digits.length() > anotherDec.digits.length()){
+                    return 0 ;
+                }
+                else if(digits.length() < anotherDec.digits.length()){
+                    return 1 ;
+                }
+            }
+            else if(digits[0] == anotherDec.digits[0] && digits[0] != '-' && digits.length() != anotherDec.digits.length()){
+                if(digits.length() > anotherDec.digits.length()){
+                    return 1 ;
+                }
+                else if(digits.length() < anotherDec.digits.length()){
+                    return 0 ;
+                }
+            }
+            else if(digits[0] == anotherDec.digits[0] && digits[0] == '-' && digits.length() == anotherDec.digits.length()){
+                for(int i = 0 ; i < digits.length() ; i++){
+                    if(digits[i] != anotherDec.digits[i]){
+                        int a = (digits[i] - '0') , b = (anotherDec.digits[i] - '0') ;
+                        if( a > b ){
+                            return 0 ;
+                        }
+                        else if( a < b ){
+                            return 1 ;
+                        }
+                    }
+                }
+            }
+            else if(digits[0] == anotherDec.digits[0] && digits[0] != '-' && digits.length() == anotherDec.digits.length()){
+                for(int i = 0 ; i < digits.length() ; i++){
+                    if(digits[i] != anotherDec.digits[i]){
+                        int a = (digits[i] - '0') , b = (anotherDec.digits[i] - '0') ;
+                        if( a > b ){
+                            return 1 ;
+                        }
+                        else if( a < b ){
+                            return 0 ;
+                        }
+                    }
+                }
+            }        
+        }
+    
+bool BigInt:: operator== (BiglInt anotherDec){
+            return digits == anotherDec.digits ;
+}
+BigInt& BigInt ::operator= (BigInt anotherDec){
+            digits = anotherDec.digits;
+            return *this ;
+}
+int BigInt:: size(){
+            if(digits[0] == '-' || digits[0] == '+' ){
+                return digits.length() - 1 ;
+            }
+            else{
+                return digits.length() ;    
+            }
+}
+int BigInt:: sign(){
+            if( digits[0] == '-'){
+                return -1 ;
+            }
+            else if(digits[0] == '+'){
+                return 1 ;
+            }
+}
+    
+friend ostream& BigInt ::operator << (ostream& out, BigInt b){
+            out << b.digits ;
+            return out ;
+}  
