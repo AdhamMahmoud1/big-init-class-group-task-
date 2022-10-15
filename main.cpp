@@ -7,17 +7,16 @@ using namespace std;
 // Drive code
 int main()
 {   
-    BigDecimalInt first("454454"), second("45445");
-    cin >> first >> second;
+    BigDecimalInt first("-1234654"), second("444");
 
 
-    if (first > second)
+    if (first < second)
     {
-        cout << first << " > " << second;
+        cout << first << " < " << second;
     }
     else
     {
-        cout << first << " < " << second;
+        cout << first << " > " << second;
     }
     
     return 0;
