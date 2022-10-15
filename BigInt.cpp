@@ -53,32 +53,32 @@ BigInt::BigInt(long long decInt){
 
 // I think it's not compeleted yet.
 BigInt BigInt:: operator+ (BigInt num1){
-    BigInt bigSum("");
-    bigSum.digits = "";
-    if (digits.size() > num1.digits.size()){
-        swap(digits, num1.digits);
+   if (digits.size() > num.digits.size()){
+        swap(digits, num.digits);
     }
-    reverse(num1.digits.begin(), num1.digits.end());
+    reverse(num.digits.begin(), num.digits.end());
     reverse(digits.begin(), digits.end());
-    int len1 = digits.size(), len2 = num1.digits.size();
+    int len1 = digits.size(), len2 = num.digits.size();
     int digitDiff = len2 - len1;
     int carry = 0;
     int intSum;
-    for (int i = len1 - 1; i <= 0; i--){
-        intSum = (digits[i] - '0') + ((num1.digits[i] - '0') + carry);
-        bigSum.digits.push_back((intSum % 10) - '0');
+    string sum = "";
+    for (int i = len1 - 1; i >= 0; i--){
+        intSum = (digits[i] - '0') + ((num.digits[i] - '0') + carry);
+        sum.push_back((intSum % 10) + '0');
         carry = intSum / 10;
     }
-    for (int i= len1; i< len2; i++)
-    {
-        int intSum = ((num1.digits[i]-'0')+carry);
-        bigSum.digits.push_back(intSum%10 + '0');
+    for (int i= len1; i< len2; i++){
+        int intSum = ((num.digits[i]-'0')+carry);
+        sum.push_back((intSum%10) + '0');
         carry = intSum/10;
     }
     if (carry){
-        bigSum.digits.push_back(carry + '0');
+        sum.push_back(carry + '0');
     }
-    reverse(bigSum.digits.begin(), bigSum.digits.end());
+    reverse(sum.begin(), sum.end());
+    BigInt bigSum("");
+    bigSum.digits = sum;
     return bigSum;
 }
  
