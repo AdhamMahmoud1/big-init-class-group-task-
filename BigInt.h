@@ -18,6 +18,9 @@ class BigDecimalInt {
         BigDecimalInt(string);
         BigDecimalInt(long long);
 
+        // Decstructor
+        ~BigDecimalInt();
+
                         /*  operators overloading   */
         
         // arithmatic 
