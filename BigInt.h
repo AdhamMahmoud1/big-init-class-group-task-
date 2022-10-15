@@ -18,14 +18,23 @@ class BigDecimalInt {
         BigDecimalInt(string);
         BigDecimalInt(long long);
 
-        /*  operator overloading   */
+                        /*  operators overloading   */
+        
+        // arithmatic 
         BigDecimalInt operator+ (BigDecimalInt num);
-        BigDecimalInt& operator= (BigDecimalInt anotherDec);
-        friend ostream& operator << (ostream& out, BigDecimalInt b);
-        friend bool operator<(const BigDecimalInt &a, const BigDecimalInt &b);
 
+        // assignment 
+        BigDecimalInt& operator= (BigDecimalInt anotherDec);
+
+        // bitwise
+        friend ostream& operator << (ostream& out, BigDecimalInt b);
+
+        // Relational
         bool operator> (BigDecimalInt anotherDec);
+        friend bool operator<(const BigDecimalInt &a, const BigDecimalInt &b);
         bool operator== (BigDecimalInt anotherDec);
+
+                                /*  Methods   */
 
         // setters 
         void set_string_digits(string &BigInt);

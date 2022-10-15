@@ -3,6 +3,8 @@
 #include "BigInt.h"
 using namespace std;
 
+//_______________
+// Adham Mahmoud
 
 BigDecimalInt::BigDecimalInt(string decStr){
     digits = "";
@@ -54,6 +56,7 @@ BigDecimalInt::BigDecimalInt(long long decInt){
     reverse(digits.begin() + i, digits.end());
 }
 
+
 BigDecimalInt BigDecimalInt:: operator+ (BigDecimalInt num){
     if (digits.size() > num.digits.size()){
         swap(digits, num.digits);
@@ -84,8 +87,119 @@ BigDecimalInt BigDecimalInt:: operator+ (BigDecimalInt num){
     return bigSum;
 }
 
- bool BigDecimalInt:: operator> (BigDecimalInt anotherDec)
- {
+
+//________________________
+// Fady Kamal
+
+bool operator<(const BigDecimalInt &a, const BigDecimalInt &b)
+{
+    bool ans;
+
+    // check by sign first
+    if (a.digits[0] == '-'  && b.digits[0] != '-')
+    {
+        // first is negative and second is positive: first is smaller
+        ans = true;
+        
+    }
+
+
+    else if ((a.digits[0] != '-')  && (b.digits[0] == '-'))
+    {
+        // first is positve and second negative: first is bigger
+        ans = false;
+    }
+
+
+    else if ((a.digits[0] == '-')  && (b.digits[0] == '-'))
+    {
+        
+        // if a.digits.length > than second or < than second: then compare in terms of length
+        if (a.digits.length() != b.digits.length())
+        {
+            // note: negative comparison is opposite to the positive one
+            ans = !(a.digits.length() < b.digits.length());
+
+        }
+        
+        else
+        {
+            // if both number have same length then compare each corresponding digit
+            // iterate over both string backwords
+            // note: iterate backwords without including 0 >> to ignore - sign
+            for (int i = a.digits.length() - 1; i > 0; --i)
+            {
+                int first_digit = a.digits[i] - '0';
+                int second_digit = b.digits[i] - '0';
+
+                // if corresponding digits are equal: continue
+                if (first_digit == second_digit)
+                {
+                    continue;
+                }
+
+                else
+                {
+                    // if not equal then compare them, break the loop
+                    ans = !(first_digit < second_digit);
+                    break;
+                }
+            }
+        }  
+
+                
+
+    }
+
+    else
+    {
+
+
+        // if a.digits.length > than second or < than second: then compare in terms of length
+        if (a.digits.length() != b.digits.length())
+        {
+            ans = (a.digits.length() < b.digits.length());
+
+        }
+        
+        else
+        {
+            // if both number have same length then compare each corresponding digit
+            // iterate over both string backwords
+            for (int i = a.digits.length() - 1; i >= 0; --i)
+            {
+                int first_digit = a.digits[i] - '0';
+                int second_digit = b.digits[i] - '0';
+
+                // if corresponding digits are equal: continue
+                if (first_digit == second_digit)
+                {
+                    continue;
+                }
+
+                else
+                {
+                    // if not equal then compare them, break the loop
+                    ans = (first_digit < second_digit);
+                    break;
+                }
+            }
+        }
+    }
+
+    
+    return ans;
+}
+
+
+
+
+
+//________________________
+// Mahmoud Mohamed
+
+bool BigDecimalInt:: operator> (BigDecimalInt anotherDec)
+{
     bool ans;
     if( digits[0] == '-' && anotherDec.digits[0] != '-')
     {
@@ -142,6 +256,7 @@ BigDecimalInt BigDecimalInt:: operator+ (BigDecimalInt num){
 
     return ans;
 }
+
 
 bool BigDecimalInt:: operator== (BigDecimalInt anotherDec){
     return digits == anotherDec.digits ;
