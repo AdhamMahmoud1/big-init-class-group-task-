@@ -1,5 +1,3 @@
-#include <iostream>
-#include <string>
 #include "BigInt.h"
 using namespace std;
 
@@ -186,8 +184,6 @@ bool operator<(const BigDecimalInt &a, const BigDecimalInt &b)
             }
         }
     }
-
-    
     return ans;
 }
 
