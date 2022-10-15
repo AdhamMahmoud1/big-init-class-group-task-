@@ -16,10 +16,7 @@ class BigDecimalInt {
         BigDecimalInt& operator= (BigDecimalInt anotherDec);
         int size();
         int sign();
-        friend ostream& operator << (ostream& out, BigDecimalInt b){
-        out << b.digits ;
-        return out ;
-        }
+        friend ostream& operator << (ostream& out, BigDecimalInt b);
 };
 
 BigDecimalInt::BigDecimalInt(string decStr){
@@ -148,7 +145,7 @@ BigDecimalInt BigDecimalInt:: operator+ (BigDecimalInt num){
                 }
             }
         }
-    }        
+    }
 }
 
 bool BigDecimalInt:: operator== (BigDecimalInt anotherDec){
@@ -165,7 +162,7 @@ int BigDecimalInt:: size(){
         return digits.length() - 1 ;
     }
     else{
-        return digits.length() ;    
+        return digits.length() ;
     }
 }
 
@@ -176,6 +173,11 @@ int BigDecimalInt:: sign(){
     else if(digits[0] == '+'){
         return 1 ;
     }
+}
+
+ostream& operator << (ostream& out, BigDecimalInt b){
+        out << b.digits ;
+        return out ;
 }
 
 int main(){
