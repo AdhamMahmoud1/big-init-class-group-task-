@@ -1,23 +1,8 @@
 #include <iostream>
 #include <string>
-#include <algorithm>
+#include "BigInt.h"
 using namespace std;
 
-class BigDecimalInt {
-    private:
-        string digits;
-    public:
-        BigDecimalInt();
-        BigDecimalInt(string);
-        BigDecimalInt(long long);
-        BigDecimalInt operator+ (BigDecimalInt num);
-        bool operator> (BigDecimalInt anotherDec);
-        bool operator== (BigDecimalInt anotherDec);
-        BigDecimalInt& operator= (BigDecimalInt anotherDec);
-        int size();
-        int sign();
-        friend ostream& operator << (ostream& out, BigDecimalInt b);
-};
 
 BigDecimalInt::BigDecimalInt(string decStr){
     digits = "";
