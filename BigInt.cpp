@@ -1,10 +1,28 @@
 #include <iostream>
 #include <string>
-#include "BigInt.h"
-
+#include <algorithm>
 using namespace std;
 
-BigInt::BigInt(string decStr): digits(decStr){
+class BigDecimalInt {
+    private:
+        string digits;
+    public:
+        BigDecimalInt();
+        BigDecimalInt(string);
+        BigDecimalInt(long long);
+        BigDecimalInt operator+ (BigDecimalInt num);
+        bool operator> (BigDecimalInt anotherDec);
+        bool operator== (BigDecimalInt anotherDec);
+        BigDecimalInt& operator= (BigDecimalInt anotherDec);
+        int size();
+        int sign();
+        friend ostream& operator << (ostream& out, BigDecimalInt b){
+        out << b.digits ;
+        return out ;
+        }
+};
+
+BigDecimalInt::BigDecimalInt(string decStr){
     digits = "";
     if (decStr[0] == '-'){
         digits.push_back(decStr[0]);
@@ -13,7 +31,7 @@ BigInt::BigInt(string decStr): digits(decStr){
             if(!isdigit(decStr[i])){
                 throw("Error");
             }
-            digits.push_back(decStr[i]);   
+            digits.push_back(decStr[i]);
         }
     }
     else if ( decStr[0] =='+'){
@@ -33,8 +51,10 @@ BigInt::BigInt(string decStr): digits(decStr){
             digits.push_back(decStr[i]);
         }
     }
+
 }
-BigInt::BigInt(long long decInt){
+
+BigDecimalInt::BigDecimalInt(long long decInt){
     digits = "";
     int i = 0;
     if (decInt < 0){
@@ -50,10 +70,8 @@ BigInt::BigInt(long long decInt){
     reverse(digits.begin() + i, digits.end());
 }
 
-
-// I think it's not compeleted yet.
-BigInt BigInt:: operator+ (BigInt num1){
-   if (digits.size() > num.digits.size()){
+BigDecimalInt BigDecimalInt:: operator+ (BigDecimalInt num){
+    if (digits.size() > num.digits.size()){
         swap(digits, num.digits);
     }
     reverse(num.digits.begin(), num.digits.end());
@@ -63,102 +81,106 @@ BigInt BigInt:: operator+ (BigInt num1){
     int carry = 0;
     int intSum;
     string sum = "";
-    for (int i = len1 - 1; i >= 0; i--){
+    for (int i = 0; i < len1; i++){
         intSum = (digits[i] - '0') + ((num.digits[i] - '0') + carry);
         sum.push_back((intSum % 10) + '0');
         carry = intSum / 10;
     }
-    for (int i= len1; i< len2; i++){
-        int intSum = ((num.digits[i]-'0')+carry);
-        sum.push_back((intSum%10) + '0');
-        carry = intSum/10;
+    for (int i= len1; i < len2 ; i++){
+        int intSum = ((num.digits[i] - '0') + carry);
+        sum.push_back((intSum % 10) + '0');
+        carry = intSum / 10;
     }
     if (carry){
         sum.push_back(carry + '0');
     }
     reverse(sum.begin(), sum.end());
-    BigInt bigSum("");
+    BigDecimalInt bigSum("");
     bigSum.digits = sum;
     return bigSum;
 }
- 
 
-bool BigInt:: operator> (BigInt anotherDec){
-            if( digits[0] == '-' && anotherDec.digits[0] != '-'){
-                return 0 ;
-            }
-            else if(digits[0] != '-' && anotherDec.digits[0] == '-'){
-                return 1 ;
-            }
-            else if(digits[0] == anotherDec.digits[0] && digits[0] == '-' && digits.length() != anotherDec.digits.length()){
-                if(digits.length() > anotherDec.digits.length()){
-                    return 0 ;
-                }
-                else if(digits.length() < anotherDec.digits.length()){
-                    return 1 ;
-                }
-            }
-            else if(digits[0] == anotherDec.digits[0] && digits[0] != '-' && digits.length() != anotherDec.digits.length()){
-                if(digits.length() > anotherDec.digits.length()){
-                    return 1 ;
-                }
-                else if(digits.length() < anotherDec.digits.length()){
-                    return 0 ;
-                }
-            }
-            else if(digits[0] == anotherDec.digits[0] && digits[0] == '-' && digits.length() == anotherDec.digits.length()){
-                for(int i = 0 ; i < digits.length() ; i++){
-                    if(digits[i] != anotherDec.digits[i]){
-                        int a = (digits[i] - '0') , b = (anotherDec.digits[i] - '0') ;
-                        if( a > b ){
-                            return 0 ;
-                        }
-                        else if( a < b ){
-                            return 1 ;
-                        }
-                    }
-                }
-            }
-            else if(digits[0] == anotherDec.digits[0] && digits[0] != '-' && digits.length() == anotherDec.digits.length()){
-                for(int i = 0 ; i < digits.length() ; i++){
-                    if(digits[i] != anotherDec.digits[i]){
-                        int a = (digits[i] - '0') , b = (anotherDec.digits[i] - '0') ;
-                        if( a > b ){
-                            return 1 ;
-                        }
-                        else if( a < b ){
-                            return 0 ;
-                        }
-                    }
-                }
-            }        
+ bool BigDecimalInt:: operator> (BigDecimalInt anotherDec){
+    if( digits[0] == '-' && anotherDec.digits[0] != '-'){
+        return 0 ;
+    }
+    else if(digits[0] != '-' && anotherDec.digits[0] == '-'){
+        return 1 ;
+    }
+    else if(digits[0] == anotherDec.digits[0] && digits[0] == '-' && digits.length() != anotherDec.digits.length()){
+        if(digits.length() > anotherDec.digits.length()){
+            return 0 ;
         }
-    
-bool BiglInt:: operator== (BigInt anotherDec){
-            return digits == anotherDec.digits ;
-}
-BigInt& BigInt ::operator= (BigInt anotherDec){
-            digits = anotherDec.digits;
-            return *this ;
-}
-int BigInt:: size(){
-            if(digits[0] == '-' || digits[0] == '+' ){
-                return digits.length() - 1 ;
+        else if(digits.length() < anotherDec.digits.length()){
+            return 1 ;
+        }
+    }
+    else if(digits[0] == anotherDec.digits[0] && digits[0] != '-' && digits.length() != anotherDec.digits.length()){
+        if(digits.length() > anotherDec.digits.length()){
+            return 1 ;
+        }
+        else if(digits.length() < anotherDec.digits.length()){
+            return 0 ;
+        }
+    }
+    else if(digits[0] == anotherDec.digits[0] && digits[0] == '-' && digits.length() == anotherDec.digits.length()){
+        for(int i = 0 ; i < digits.length() ; i++){
+            if(digits[i] != anotherDec.digits[i]){
+                int a = (digits[i] - '0') , b = (anotherDec.digits[i] - '0') ;
+                if( a > b ){
+                    return 0 ;
+                }
+                else if( a < b ){
+                    return 1 ;
+                }
             }
-            else{
-                return digits.length() ;    
+        }
+    }
+    else if(digits[0] == anotherDec.digits[0] && digits[0] != '-' && digits.length() == anotherDec.digits.length()){
+        for(int i = 0 ; i < digits.length() ; i++){
+            if(digits[i] != anotherDec.digits[i]){
+                int a = (digits[i] - '0') , b = (anotherDec.digits[i] - '0') ;
+                if( a > b ){
+                    return 1 ;
+                }
+                else if( a < b ){
+                    return 0 ;
+                }
             }
+        }
+    }        
 }
-int BigInt:: sign(){
-            if( digits[0] == '-'){
-                return -1 ;
-            }
-            else if(digits[0] == '+'){
-                return 1 ;
-            }
+
+bool BigDecimalInt:: operator== (BigDecimalInt anotherDec){
+    return digits == anotherDec.digits ;
 }
-    
-ostream& operator << (ostream& out, BigInt b){
-            out << b.digits ;
-            return out ;
-}  
+
+BigDecimalInt& BigDecimalInt :: operator= (BigDecimalInt anotherDec){
+    digits = anotherDec.digits ;
+    return *this ;
+}
+
+int BigDecimalInt:: size(){
+    if(digits[0] == '-' || digits[0] == '+' ){
+        return digits.length() - 1 ;
+    }
+    else{
+        return digits.length() ;    
+    }
+}
+
+int BigDecimalInt:: sign(){
+    if( digits[0] == '-'){
+        return -1 ;
+    }
+    else if(digits[0] == '+'){
+        return 1 ;
+    }
+}
+
+int main(){
+    BigDecimalInt n1("123");
+    BigDecimalInt n2("3214");
+    BigDecimalInt n3 = n1 + n2 ;
+    cout << n3 << endl;
+}
