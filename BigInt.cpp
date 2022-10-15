@@ -4,7 +4,7 @@
 
 using namespace std;
 
-BigDecimalInt::BigInt(string decStr): digits(decStr){
+BigInt::BigInt(string decStr): digits(decStr){
     digits = "";
     if (decStr[0] == '-'){
         digits.push_back(decStr[0]);
@@ -34,7 +34,7 @@ BigDecimalInt::BigInt(string decStr): digits(decStr){
         }
     }
 }
-BigDecimalInt::BigInt(long long decInt){
+BigInt::BigInt(long long decInt){
     digits = "";
     int i = 0;
     if (decInt < 0){
