@@ -97,27 +97,32 @@ BigDecimalInt BigDecimalInt:: operator+ (BigDecimalInt num){
     return bigSum;
 }
 
- bool BigDecimalInt:: operator> (BigDecimalInt anotherDec){
-    if( digits[0] == '-' && anotherDec.digits[0] != '-'){
-        return 0 ;
+ bool BigDecimalInt:: operator> (BigDecimalInt anotherDec)
+ {
+    bool ans;
+    if( digits[0] == '-' && anotherDec.digits[0] != '-')
+    {
+        ans = 0 ;
     }
-    else if(digits[0] != '-' && anotherDec.digits[0] == '-'){
-        return 1 ;
+    else if(digits[0] != '-' && anotherDec.digits[0] == '-')
+    {
+        ans = 1 ;
     }
     else if(digits[0] == anotherDec.digits[0] && digits[0] == '-' && digits.length() != anotherDec.digits.length()){
+        
         if(digits.length() > anotherDec.digits.length()){
-            return 0 ;
+            ans = 0 ;
         }
         else if(digits.length() < anotherDec.digits.length()){
-            return 1 ;
+            ans = 1 ;
         }
     }
     else if(digits[0] == anotherDec.digits[0] && digits[0] != '-' && digits.length() != anotherDec.digits.length()){
         if(digits.length() > anotherDec.digits.length()){
-            return 1 ;
+            ans = 1 ;
         }
         else if(digits.length() < anotherDec.digits.length()){
-            return 0 ;
+            ans = 0 ;
         }
     }
     else if(digits[0] == anotherDec.digits[0] && digits[0] == '-' && digits.length() == anotherDec.digits.length()){
@@ -125,10 +130,10 @@ BigDecimalInt BigDecimalInt:: operator+ (BigDecimalInt num){
             if(digits[i] != anotherDec.digits[i]){
                 int a = (digits[i] - '0') , b = (anotherDec.digits[i] - '0') ;
                 if( a > b ){
-                    return 0 ;
+                    ans = 0 ;
                 }
                 else if( a < b ){
-                    return 1 ;
+                    ans = 1 ;
                 }
             }
         }
@@ -138,14 +143,15 @@ BigDecimalInt BigDecimalInt:: operator+ (BigDecimalInt num){
             if(digits[i] != anotherDec.digits[i]){
                 int a = (digits[i] - '0') , b = (anotherDec.digits[i] - '0') ;
                 if( a > b ){
-                    return 1 ;
+                    ans = 1 ;
                 }
                 else if( a < b ){
-                    return 0 ;
+                    ans = 0 ;
                 }
             }
         }
     }
+    return ans;
 }
 
 bool BigDecimalInt:: operator== (BigDecimalInt anotherDec){
