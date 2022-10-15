@@ -108,8 +108,9 @@ BigDecimalInt BigDecimalInt:: operator+ (BigDecimalInt num){
     {
         ans = 1 ;
     }
-    else if(digits[0] == anotherDec.digits[0] && digits[0] == '-' && digits.length() != anotherDec.digits.length()){
-        
+    else if(digits[0] == anotherDec.digits[0] && digits[0] == '-' && digits.length() != anotherDec.digits.length())
+    {
+
         if(digits.length() > anotherDec.digits.length()){
             ans = 0 ;
         }
@@ -151,6 +152,7 @@ BigDecimalInt BigDecimalInt:: operator+ (BigDecimalInt num){
             }
         }
     }
+
     return ans;
 }
 
@@ -189,7 +191,7 @@ ostream& operator << (ostream& out, BigDecimalInt b){
 }
 
 int main(){
-    BigDecimalInt n1("123");
+    BigDecimalInt n1("-123");
     BigDecimalInt n2("3214");
     BigDecimalInt n3 = n1 + n2 ;
     cout << n3 << endl;
