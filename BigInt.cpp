@@ -256,6 +256,10 @@ BigDecimalInt& BigDecimalInt :: operator= (BigDecimalInt anotherDec){
     return *this ;
 }
 
+
+// new assin
+
+
 int BigDecimalInt:: size(){
     if(digits[0] == '-' || digits[0] == '+' ){
         return digits.length() - 1 ;
@@ -299,11 +303,10 @@ istream& operator >> (istream& in, BigDecimalInt &b)
 
         // add char to end to digits of b
         b.digits.push_back(str[i]);
-        return in;
+        
     }
 
-    
-
-    
+    return in; 
 
 }
+
