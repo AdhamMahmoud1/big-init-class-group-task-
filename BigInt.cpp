@@ -36,6 +36,8 @@ BigDecimalInt::BigDecimalInt(string decStr){
 
 }
 
+
+
 BigDecimalInt::BigDecimalInt(long long decInt){
     digits = "";
     int i = 0;
