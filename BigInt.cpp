@@ -36,8 +36,6 @@ BigDecimalInt::BigDecimalInt(string decStr){
 
 }
 
-
-
 BigDecimalInt::BigDecimalInt(long long decInt){
     digits = "";
     int i = 0;
@@ -53,7 +51,6 @@ BigDecimalInt::BigDecimalInt(long long decInt){
     while(decInt != 0);
     reverse(digits.begin() + i, digits.end());
 }
-
 
 BigDecimalInt BigDecimalInt:: operator+ (BigDecimalInt num){
     if (digits.size() > num.digits.size()){
@@ -188,9 +185,6 @@ bool operator<(const BigDecimalInt &a, const BigDecimalInt &b)
 }
 
 
-
-
-
 //________________________
 // Mahmoud Mohamed
 
@@ -253,7 +247,6 @@ bool BigDecimalInt:: operator> (BigDecimalInt anotherDec)
     return ans;
 }
 
-
 bool BigDecimalInt:: operator== (BigDecimalInt anotherDec){
     return digits == anotherDec.digits ;
 }
@@ -286,11 +279,4 @@ int BigDecimalInt:: sign(){
 ostream& operator << (ostream& out, BigDecimalInt b){
         out << b.digits ;
         return out ;
-}
-
-int main(){
-    BigDecimalInt n1("-123");
-    BigDecimalInt n2("3214");
-    BigDecimalInt n3 = n1 + n2 ;
-    cout << n3 << endl;
 }
