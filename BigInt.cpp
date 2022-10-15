@@ -280,3 +280,30 @@ ostream& operator << (ostream& out, BigDecimalInt b){
         out << b.digits ;
         return out ;
 }
+
+// insertion operator overloaing defination
+istream& operator >> (istream& in, BigDecimalInt &b)
+{
+    // declare string variable to store within it
+    string str;
+    in >> str;
+
+    // iteravte over string and append letters to b
+    for (int i = str.length() - 1; i >= 0; --i)
+    {
+        if (!isdigit(str[i]))
+        {
+            throw("Error");
+        }
+
+
+        // add char to end to digits of b
+        b.digits.push_back(str[i]);
+        return in;
+    }
+
+    
+
+    
+
+}
