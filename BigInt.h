@@ -20,7 +20,7 @@ class BigDecimalInt {
         BigDecimalInt(long long);
 
         // Decstructor
-        ~BigDecimalInt();
+        // ~BigDecimalInt();
 
                         /*  operators overloading   */
         
@@ -32,6 +32,7 @@ class BigDecimalInt {
 
         // bitwise
         friend ostream& operator << (ostream& out, BigDecimalInt b);
+        friend istream& operator >> (istream& in, BigDecimalInt &b);
 
         // Relational
         bool operator> (BigDecimalInt anotherDec);
