@@ -167,10 +167,12 @@ int BigDecimalInt:: size(){
 }
 
 int BigDecimalInt:: sign(){
-    if( digits[0] == '-'){
+    if( digits[0] == '-')
+    {
         return -1 ;
     }
-    else if(digits[0] == '+'){
+    else
+    {
         return 1 ;
     }
 }
