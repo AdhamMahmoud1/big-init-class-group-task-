@@ -15,7 +15,6 @@ class BigDecimalInt {
     public:
 
         // Constructors
-        BigDecimalInt();
         BigDecimalInt(string);
         BigDecimalInt(long long);
 
