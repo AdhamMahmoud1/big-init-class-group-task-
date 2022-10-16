@@ -121,8 +121,8 @@ bool operator<(const BigDecimalInt &a, const BigDecimalInt &b)
         {
             // if both number have same length then compare each corresponding digit
             // iterate over both string backwords
-            // note: iterate backwords without including 0 >> to ignore - sign
-            for (int i = a.digits.length() - 1; i > 0; --i)
+            // note: iterate without including 0 >> to ignore - sign
+            for (int i = 1; i < a.digits.length(); ++i)
             {
                 int first_digit = a.digits[i] - '0';
                 int second_digit = b.digits[i] - '0';
@@ -160,8 +160,8 @@ bool operator<(const BigDecimalInt &a, const BigDecimalInt &b)
         else
         {
             // if both number have same length then compare each corresponding digit
-            // iterate over both string backwords
-            for (int i = a.digits.length() - 1; i >= 0; --i)
+            // iterate over both string and compare each correspoding digits
+            for (int i = 0; i < a.digits.length(); ++i)
             {
                 int first_digit = a.digits[i] - '0';
                 int second_digit = b.digits[i] - '0';
