@@ -3,6 +3,9 @@ using namespace std;
 
 //_______________
 // Adham Mahmoud
+BigDecimalInt:: BigDecimalInt(){
+    digits = "0" ;
+}
 
 BigDecimalInt::BigDecimalInt(string decStr){
     digits = "";
@@ -79,6 +82,7 @@ BigDecimalInt BigDecimalInt:: operator+ (BigDecimalInt num){
     reverse(sum.begin(), sum.end());
     BigDecimalInt bigSum("");
     bigSum.digits = sum;
+    reverse(digits.begin(), digits.end());
     return bigSum;
 }
 
@@ -188,64 +192,38 @@ bool operator<(const BigDecimalInt &a, const BigDecimalInt &b)
 //________________________
 // Mahmoud Mohamed
 
-bool BigDecimalInt:: operator> (BigDecimalInt anotherDec)
-{
-    bool ans;
-    if( digits[0] == '-' && anotherDec.digits[0] != '-')
-    {
-        ans = 0 ;
-    }
-    else if(digits[0] != '-' && anotherDec.digits[0] == '-')
-    {
-        ans = 1 ;
-    }
-    else if(digits[0] == anotherDec.digits[0] && digits[0] == '-' && digits.length() != anotherDec.digits.length())
-    {
+bool BigDecimalInt:: operator> (BigDecimalInt anotherDec){
+            bool ans ;
 
-        if(digits.length() > anotherDec.digits.length()){
-            ans = 0 ;
-        }
-        else if(digits.length() < anotherDec.digits.length()){
-            ans = 1 ;
-        }
-    }
-    else if(digits[0] == anotherDec.digits[0] && digits[0] != '-' && digits.length() != anotherDec.digits.length()){
-        if(digits.length() > anotherDec.digits.length()){
-            ans = 1 ;
-        }
-        else if(digits.length() < anotherDec.digits.length()){
-            ans = 0 ;
-        }
-    }
-    else if(digits[0] == anotherDec.digits[0] && digits[0] == '-' && digits.length() == anotherDec.digits.length()){
-        for(int i = 0 ; i < digits.length() ; i++){
-            if(digits[i] != anotherDec.digits[i]){
-                int a = (digits[i] - '0') , b = (anotherDec.digits[i] - '0') ;
-                if( a > b ){
-                    ans = 0 ;
-                }
-                else if( a < b ){
-                    ans = 1 ;
+            if( digits[0] == '-' && anotherDec.digits[0] != '-'){
+                return 0 ;
+            }
+            else if(digits[0] != '-' && anotherDec.digits[0] == '-'){
+                return 1 ;
+            }
+            else if(anotherDec.digits[0] == '-' && digits[0] == '-' && digits.length() != anotherDec.digits.length()){
+                return !(digits.length() > anotherDec.digits.length()) ;
+            }
+            else if(anotherDec.digits[0] != '-' && digits[0] != '-' && digits.length() != anotherDec.digits.length()){
+                return (digits.length() > anotherDec.digits.length()) ;
+            }
+            else if(anotherDec.digits[0] == '-' && digits[0] == '-' && digits.length() == anotherDec.digits.length()){
+                for(int i = 0 ; i < digits.length() ; i++){
+                    if(digits[i] != anotherDec.digits[i]){
+                        int a = (digits[i] - '0') , b = (anotherDec.digits[i] - '0') ;
+                        return !(a > b) ;
+                    }
                 }
             }
-        }
-    }
-    else if(digits[0] == anotherDec.digits[0] && digits[0] != '-' && digits.length() == anotherDec.digits.length()){
-        for(int i = 0 ; i < digits.length() ; i++){
-            if(digits[i] != anotherDec.digits[i]){
-                int a = (digits[i] - '0') , b = (anotherDec.digits[i] - '0') ;
-                if( a > b ){
-                    ans = 1 ;
+            else if(anotherDec.digits[0] != '-' && digits[0] != '-' && digits.length() == anotherDec.digits.length()){
+                for(int i = 0 ; i < digits.length() ; i++){
+                    if(digits[i] != anotherDec.digits[i]){
+                        int a = (digits[i] - '0') , b = (anotherDec.digits[i] - '0') ;
+                        return (a > b) ;
+                    }
                 }
-                else if( a < b ){
-                    ans = 0 ;
-                }
-            }
+            }        
         }
-    }
-
-    return ans;
-}
 
 bool BigDecimalInt:: operator== (BigDecimalInt anotherDec){
     return digits == anotherDec.digits ;
