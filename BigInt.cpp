@@ -55,38 +55,44 @@ BigDecimalInt::BigDecimalInt(long long decInt){
     reverse(digits.begin() + i, digits.end());
 }
 
-BigDecimalInt BigDecimalInt:: operator+ (BigDecimalInt num){
-    if (digits.size() > num.digits.size()){
-        swap(digits, num.digits);
+BigDecimalInt operator+ (BigDecimalInt num1, BigDecimalInt num2){
+    string sum = "";
+    if (num1.digits[0] == '-' && num2.digits[0] == '-'){  // This condition for adding two negative numbers
+        sum.push_back('-');
+        num1.digits.erase(num1.digits.begin() + 0);
+        num2.digits.erase(num2.digits.begin() + 0);
     }
-    reverse(num.digits.begin(), num.digits.end());
-    reverse(digits.begin(), digits.end());
-    int len1 = digits.size(), len2 = num.digits.size();
-    int digitDiff = len2 - len1;
+    if (num1.digits.size() > num2.digits.size()){
+        swap(num1.digits, num2.digits);
+    } 
+    reverse(num1.digits.begin(), num1.digits.end()); // reversing the number two add digits from the smalleset to the greatest
+    reverse(num2.digits.begin(), num2.digits.end());
+    int len1 = num1.digits.size(), len2 = num2.digits.size();
     int carry = 0;
     int intSum;
-    string sum = "";
     for (int i = 0; i < len1; i++){
-        intSum = (digits[i] - '0') + ((num.digits[i] - '0') + carry);
+        intSum = (num1.digits[i] - '0') + ((num2.digits[i] - '0') + carry);
         sum.push_back((intSum % 10) + '0');
         carry = intSum / 10;
     }
-    for (int i= len1; i < len2 ; i++){
-        int intSum = ((num.digits[i] - '0') + carry);
+    for (int i = len1; i < len2 ; i++){  // If the number of digits of the number is greater than the other
+        int intSum = ((num2.digits[i] - '0') + carry);
         sum.push_back((intSum % 10) + '0');
         carry = intSum / 10;
     }
     if (carry){
         sum.push_back(carry + '0');
     }
-    reverse(sum.begin(), sum.end());
+    if (sum[0] == '-'){
+        reverse(sum.begin() + 1, sum.end());
+    }
+    else {
+        reverse(sum.begin(), sum.end());
+    }
     BigDecimalInt bigSum("");
     bigSum.digits = sum;
-    reverse(digits.begin(), digits.end());
     return bigSum;
 }
-
-
 //________________________
 // Fady Kamal
 
