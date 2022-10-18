@@ -25,7 +25,8 @@ class BigDecimalInt {
                         /*  operators overloading   */
         
         // arithmatic 
-        BigDecimalInt operator+ (BigDecimalInt num);
+       // I made this operator as a friend member to be able to pass 2 objects as a argument
+        friend BigDecimalInt operator+ (BigDecimalInt , BigDecimalInt );
 
         // assignment 
         BigDecimalInt& operator= (BigDecimalInt anotherDec);
