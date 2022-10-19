@@ -14,19 +14,28 @@ BigDecimalInt::BigDecimalInt(string decStr){
     else if ( decStr[0] =='+'){
         decStr.erase(decStr.begin());
     }
+
+    if (IsStringCompriesdOfZeros(decStr))
+    {
+        decStr = "0";
+    }
     
     // if length of decStr  != 1, ans first char of it = 0 remove leading zeros
+    else if ((decStr.length() != 1) && (decStr[0] == '0'))
+    {
+        // This var is a counter to take a supstring in the next loop
         for (int i = 0; i < decStr.size(); i++){   // This loop if the first digits are zeros
-            if ((decStr.length() != 1) && (decStr[0] == '0')){
-                decStr.erase(decStr.begin());
+            if (decStr[i] == '0')
+            {
                 continue;
             }
-            else{
+            else
+            {
                 decStr = decStr.substr(i, decStr.length() - i);
                 break;
             }
         }
-    
+    }
     for (int i = 0; i < decStr.size(); i++){
         if(!isdigit(decStr[i])){
             throw("Error");
@@ -34,6 +43,7 @@ BigDecimalInt::BigDecimalInt(string decStr){
         digits.push_back(decStr[i]);
     }
 }
+
 
 BigDecimalInt::BigDecimalInt(long long decInt){
     digits = "";
