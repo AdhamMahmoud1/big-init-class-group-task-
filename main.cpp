@@ -12,15 +12,18 @@ int main()
     cin >> first_ >> second_;
     BigDecimalInt first(first_), second(second_);
 
+    // testing of - operator
+    cout << first - second << endl;   
 
-    if (first < second)
-    {
-        cout << first << " < " << second;
-    }
-    else
-    {
-        cout << first << " > " << second;
-    }
+
+    // if (first < second)
+    // {
+    //     cout << first << " < " << second;
+    // }
+    // else
+    // {
+    //     cout << first << " > " << second;
+    // }
     
     return 0;
 }
