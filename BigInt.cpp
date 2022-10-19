@@ -91,6 +91,7 @@ BigDecimalInt operator+ (BigDecimalInt num1, BigDecimalInt num2){
 //________________________
 // Fady Kamal
 
+
 string BigDecimalInt::get_digits()
 {
     return digits;
@@ -105,9 +106,7 @@ bool operator<(const BigDecimalInt &a, const BigDecimalInt &b)
     {
         // first is negative and second is positive: first is smaller
         ans = true;
-        
     }
-
 
     else if ((a.digits[0] != '-')  && (b.digits[0] == '-'))
     {
@@ -115,16 +114,14 @@ bool operator<(const BigDecimalInt &a, const BigDecimalInt &b)
         ans = false;
     }
 
-
     else if ((a.digits[0] == '-')  && (b.digits[0] == '-'))
     {
-        
+
         // if a.digits.length > than second or < than second: then compare in terms of length
         if (a.digits.length() != b.digits.length())
         {
             // note: negative comparison is opposite to the positive one
             ans = !(a.digits.length() < b.digits.length());
-
         }
         
         else
@@ -151,15 +148,10 @@ bool operator<(const BigDecimalInt &a, const BigDecimalInt &b)
                 }
             }
         }  
-
-                
-
     }
 
     else
     {
-
-
         // if a.digits.length > than second or < than second: then compare in terms of length
         if (a.digits.length() != b.digits.length())
         {
@@ -232,7 +224,6 @@ BigDecimalInt operator-(BigDecimalInt &a, BigDecimalInt &b)
         ans = '-' + find_sum(a_str, b_str, is_first_smaller);
     }
     
-
     // if both are negative
     else
     {
@@ -243,8 +234,6 @@ BigDecimalInt operator-(BigDecimalInt &a, BigDecimalInt &b)
         {
             ans = '-' + ans;
         }
-
-
     }
 
     BigDecimalInt final(ans);
