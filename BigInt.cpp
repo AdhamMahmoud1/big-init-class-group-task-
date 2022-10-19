@@ -86,8 +86,15 @@ BigDecimalInt operator+ (BigDecimalInt num1, BigDecimalInt num2){
     bigSum.digits = sum;
     return bigSum;
 }
+
+
 //________________________
 // Fady Kamal
+
+string BigDecimalInt::get_digits()
+{
+    return digits;
+}
 
 bool operator<(const BigDecimalInt &a, const BigDecimalInt &b)
 {
@@ -249,38 +256,42 @@ BigDecimalInt operator-(BigDecimalInt &a, BigDecimalInt &b)
 //________________________
 // Mahmoud Mohamed
 
-bool BigDecimalInt:: operator> (BigDecimalInt anotherDec){
-            bool ans ;
+bool BigDecimalInt:: operator> (BigDecimalInt anotherDec)
+{
+    bool ans = false;
 
-            if( digits[0] == '-' && anotherDec.digits[0] != '-'){
-                return 0 ;
+    if( digits[0] == '-' && anotherDec.digits[0] != '-'){
+        ans = 0 ;
+    }
+    else if(digits[0] != '-' && anotherDec.digits[0] == '-'){
+        ans = 1 ;
+    }
+    else if(anotherDec.digits[0] == '-' && digits[0] == '-' && digits.length() != anotherDec.digits.length()){
+        ans = !(digits.length() > anotherDec.digits.length()) ;
+    }
+    else if(anotherDec.digits[0] != '-' && digits[0] != '-' && digits.length() != anotherDec.digits.length()){
+        ans = (digits.length() > anotherDec.digits.length()) ;
+    }
+    else if(anotherDec.digits[0] == '-' && digits[0] == '-' && digits.length() == anotherDec.digits.length()){
+        for(int i = 0 ; i < digits.length() ; i++){
+            if(digits[i] != anotherDec.digits[i]){
+                int a = (digits[i] - '0') , b = (anotherDec.digits[i] - '0') ;
+                ans = !(a > b) ;
             }
-            else if(digits[0] != '-' && anotherDec.digits[0] == '-'){
-                return 1 ;
-            }
-            else if(anotherDec.digits[0] == '-' && digits[0] == '-' && digits.length() != anotherDec.digits.length()){
-                return !(digits.length() > anotherDec.digits.length()) ;
-            }
-            else if(anotherDec.digits[0] != '-' && digits[0] != '-' && digits.length() != anotherDec.digits.length()){
-                return (digits.length() > anotherDec.digits.length()) ;
-            }
-            else if(anotherDec.digits[0] == '-' && digits[0] == '-' && digits.length() == anotherDec.digits.length()){
-                for(int i = 0 ; i < digits.length() ; i++){
-                    if(digits[i] != anotherDec.digits[i]){
-                        int a = (digits[i] - '0') , b = (anotherDec.digits[i] - '0') ;
-                        return !(a > b) ;
-                    }
-                }
-            }
-            else if(anotherDec.digits[0] != '-' && digits[0] != '-' && digits.length() == anotherDec.digits.length()){
-                for(int i = 0 ; i < digits.length() ; i++){
-                    if(digits[i] != anotherDec.digits[i]){
-                        int a = (digits[i] - '0') , b = (anotherDec.digits[i] - '0') ;
-                        return (a > b) ;
-                    }
-                }
-            }        
         }
+    }
+    else if(anotherDec.digits[0] != '-' && digits[0] != '-' && digits.length() == anotherDec.digits.length()){
+        for(int i = 0 ; i < digits.length() ; i++){
+            if(digits[i] != anotherDec.digits[i]){
+                int a = (digits[i] - '0') , b = (anotherDec.digits[i] - '0') ;
+                ans = (a > b) ;
+            }
+        }
+    }
+    return ans;
+
+           
+}
 
 bool BigDecimalInt:: operator== (BigDecimalInt anotherDec){
     return digits == anotherDec.digits ;
