@@ -213,7 +213,7 @@ BigDecimalInt operator-(BigDecimalInt &a, BigDecimalInt &b)
 
     else if ((IsPositive(a)) && (IsNegative(b)))
     {
-        ans = find_sum(a_str, b_str, is_first_smaller);
+        ans = find_sum(a_str, b_str);
 
         
 
@@ -221,7 +221,7 @@ BigDecimalInt operator-(BigDecimalInt &a, BigDecimalInt &b)
 
     else if ((IsNegative(a)) && (IsPositive(b)))
     {
-        ans = '-' + find_sum(a_str, b_str, is_first_smaller);
+        ans = '-' + find_sum(a_str, b_str);
     }
     
     // if both are negative

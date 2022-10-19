@@ -236,11 +236,11 @@ namespace HelperFunctions
     }
 
     // Find Sum of +ve BigDecimalInts
-    string find_sum (string num1, string num2, bool is_first_smaller=false)     // Thanks to Adham Mahmoud
+    string find_sum (string num1, string num2)     // Thanks to Adham Mahmoud
     {
         string sum = "";
     
-        if (is_first_smaller)
+        if (num1.length() > num2.length())
         {
             swap(num1, num2);
         } 
