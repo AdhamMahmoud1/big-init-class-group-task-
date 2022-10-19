@@ -14,16 +14,24 @@ BigDecimalInt::BigDecimalInt(string decStr){
     else if ( decStr[0] =='+'){
         decStr.erase(decStr.begin());
     }
-    int i = 0;  // This var is a counter to take a supstring in the next loop
-    for (i; i < decStr.size(); i++){   // This loop if the first digits are zeros
-        if (decStr[i] == '0'){
-            continue;
-        }
-        else{
-            break;
+    
+    // if length of decStr  != 1, ans first char of it = 0 remove leading zeros
+    if ((decStr.length() != 1) && (decStr[0] == '0'))
+    {
+        // This var is a counter to take a supstring in the next loop
+        for (int i = 0; i < decStr.size(); i++){   // This loop if the first digits are zeros
+            if (decStr[i] == '0')
+            {
+                continue;
+            }
+            else
+            {
+                decStr = decStr.substr(i, decStr.length() - i);
+                break;
+            }
         }
     }
-    for (i; i < decStr.size(); i++){
+    for (int i = 0; i < decStr.size(); i++){
         if(!isdigit(decStr[i])){
             throw("Error");
         }
