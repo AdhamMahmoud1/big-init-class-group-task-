@@ -1,5 +1,6 @@
 #include "BigInt.h"
 using namespace std;
+using namespace HelperFunctions;
 
 //_______________
 // Adham Mahmoud
@@ -185,6 +186,64 @@ bool operator<(const BigDecimalInt &a, const BigDecimalInt &b)
     }
     return ans;
 }
+
+
+// - operator overloadin
+BigDecimalInt operator-(BigDecimalInt &a, BigDecimalInt &b)
+{
+
+    // check if first smaller or not, incase swap
+    bool is_first_smaller = (IsFirstSmaller(a, b));
+
+    // get their digits and parse them to get rid of sign
+    string a_str = ParseString(a.get_digits()), b_str = ParseString(b.get_digits());
+
+    // to store answer within it  
+    string ans;
+
+    if ((IsPositive(a)) && (IsPositive(b)))
+    {
+        // sub regularly
+        ans = find_diff(a_str, b_str, is_first_smaller);
+
+        if (is_first_smaller)
+        {
+            ans = '-' + ans;
+        }
+    }
+
+    else if ((IsPositive(a)) && (IsNegative(b)))
+    {
+        ans = find_sum(a_str, b_str, is_first_smaller);
+
+        
+
+    }
+
+    else if ((IsNegative(a)) && (IsPositive(b)))
+    {
+        ans = '-' + find_sum(a_str, b_str, is_first_smaller);
+    }
+    
+
+    // if both are negative
+    else
+    {
+        // sub regularly
+        ans = find_diff(a_str, b_str, !is_first_smaller);
+
+        if (is_first_smaller)
+        {
+            ans = '-' + ans;
+        }
+
+
+    }
+
+    BigDecimalInt final(ans);
+    return final;
+}
+
 
 
 //________________________
