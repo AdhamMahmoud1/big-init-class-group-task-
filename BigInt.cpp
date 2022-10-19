@@ -3,41 +3,33 @@ using namespace std;
 
 //_______________
 // Adham Mahmoud
-BigDecimalInt:: BigDecimalInt(){
-    digits = "0" ;
-}
 
 BigDecimalInt::BigDecimalInt(string decStr){
     digits = "";
     if (decStr[0] == '-'){
         digits.push_back(decStr[0]);
-        decStr.erase(decStr.begin());
-        for (int i = 0; i < decStr.size(); i ++){
-            if(!isdigit(decStr[i])){
-                throw("Error");
-            }
-            digits.push_back(decStr[i]);
-        }
+        decStr.erase(decStr.begin());   
     }
     else if ( decStr[0] =='+'){
         decStr.erase(decStr.begin());
-        for (int i = 0; i < decStr.size(); i ++){
-            if(!isdigit(decStr[i])){
-                throw("Error");
-            }
-            digits.push_back(decStr[i]);
+    }
+    int i = 0;
+    for (i; i < decStr.size(); i++){   // This loop if the first digits are zeros
+        if (decStr[i] == '0'){
+            continue;
+        }
+        else{
+            break;
         }
     }
-    else{
-        for (int i = 0; i < decStr.size(); i ++){
-            if(!isdigit(decStr[i])){
-                throw("Error");
-            }
-            digits.push_back(decStr[i]);
+    for (i; i < decStr.size(); i++){
+        if(!isdigit(decStr[i])){
+            throw("Error");
         }
+        digits.push_back(decStr[i]);
     }
-
 }
+
 
 BigDecimalInt::BigDecimalInt(long long decInt){
     digits = "";
