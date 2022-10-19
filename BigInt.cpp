@@ -13,7 +13,7 @@ BigDecimalInt::BigDecimalInt(string decStr){
     else if ( decStr[0] =='+'){
         decStr.erase(decStr.begin());
     }
-    int i = 0;
+    int i = 0;  // This var is a counter to take a supstring in the next loop
     for (i; i < decStr.size(); i++){   // This loop if the first digits are zeros
         if (decStr[i] == '0'){
             continue;
