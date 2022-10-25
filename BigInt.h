@@ -33,6 +33,7 @@ class BigDecimalInt {
         friend istream& operator >> (istream& in, BigDecimalInt &b);
 
         // Relational
+        bool for_loob(BigDecimalInt &anotherDec);
         bool operator> (BigDecimalInt anotherDec);
         friend bool operator<(const BigDecimalInt &a, const BigDecimalInt &b);
         bool operator== (BigDecimalInt anotherDec);
