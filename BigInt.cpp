@@ -5,6 +5,10 @@ using namespace HelperFunctions;
 //_______________
 // Adham Mahmoud
 
+BigDecimalInt:: BigDecimalInt(){
+    digits = "0" ;
+}
+
 BigDecimalInt::BigDecimalInt(string decStr){
     digits = "";
     if (decStr[0] == '-'){
@@ -258,41 +262,28 @@ BigDecimalInt operator-(BigDecimalInt &a, BigDecimalInt &b)
 //________________________
 // Mahmoud Mohamed
 
-bool BigDecimalInt:: operator> (BigDecimalInt anotherDec)
-{
-    bool ans = false;
-
-    if( digits[0] == '-' && anotherDec.digits[0] != '-'){
-        ans = 0 ;
-    }
-    else if(digits[0] != '-' && anotherDec.digits[0] == '-'){
-        ans = 1 ;
-    }
-    else if(anotherDec.digits[0] == '-' && digits[0] == '-' && digits.length() != anotherDec.digits.length()){
-        ans = !(digits.length() > anotherDec.digits.length()) ;
-    }
-    else if(anotherDec.digits[0] != '-' && digits[0] != '-' && digits.length() != anotherDec.digits.length()){
-        ans = (digits.length() > anotherDec.digits.length()) ;
-    }
-    else if(anotherDec.digits[0] == '-' && digits[0] == '-' && digits.length() == anotherDec.digits.length()){
+bool BigDecimalInt:: for_loob(BigDecimalInt &anotherDec){
         for(int i = 0 ; i < digits.length() ; i++){
             if(digits[i] != anotherDec.digits[i]){
                 int a = (digits[i] - '0') , b = (anotherDec.digits[i] - '0') ;
-                ans = !(a > b) ;
+                return (a > b) ;
             }
         }
     }
-    else if(anotherDec.digits[0] != '-' && digits[0] != '-' && digits.length() == anotherDec.digits.length()){
-        for(int i = 0 ; i < digits.length() ; i++){
-            if(digits[i] != anotherDec.digits[i]){
-                int a = (digits[i] - '0') , b = (anotherDec.digits[i] - '0') ;
-                ans = (a > b) ;
-            }
-        }
-    }
-    return ans;
 
-           
+bool BigDecimalInt:: operator> (BigDecimalInt anotherDec){
+    if( digits[0] == '-' && anotherDec.digits[0] != '-')
+        return 0 ;
+    else if(digits[0] != '-' && anotherDec.digits[0] == '-')
+        return  1 ;
+    else if(anotherDec.digits[0] == '-' && digits[0] == '-' && digits.length() != anotherDec.digits.length())
+        return  !(digits.length() > anotherDec.digits.length()) ;
+    else if(anotherDec.digits[0] != '-' && digits[0] != '-' && digits.length() != anotherDec.digits.length())
+        return  (digits.length() > anotherDec.digits.length()) ;
+    else if(anotherDec.digits[0] == '-' && digits[0] == '-' && digits.length() == anotherDec.digits.length())
+        return  !for_loob(anotherDec );
+    else if(anotherDec.digits[0] != '-' && digits[0] != '-' && digits.length() == anotherDec.digits.length())
+        return for_loob(anotherDec ) ;  
 }
 
 bool BigDecimalInt:: operator== (BigDecimalInt anotherDec){
@@ -357,4 +348,3 @@ ostream& operator << (ostream& out, BigDecimalInt b){
 //     return in; 
 
 // }
-
